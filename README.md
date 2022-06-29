@@ -109,7 +109,9 @@ An attached link is [here](<path-to-image>)
 ```
 
 **NOTE**: Be careful with `Attachment`! If your path string is a subset of
-another longer string or referenced in text, you may get undesired behavior.
+another longer string or referenced in text, it will be replaced as well.
+An exception to this is when the path string is wrapped in [], e.g. [Attachment.txt](Attachment.txt)
+only replaces the latter link target, but not the link text.
 
 Mark also supports macro definitions, which are defined as regexps which will
 be replaced with specified template:

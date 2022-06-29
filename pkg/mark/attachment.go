@@ -230,6 +230,20 @@ func CompileAttachmentLinks(markdown []byte, attaches []Attachment) []byte {
 			)
 
 			found = true
+
+			// Recover occurrences of "[replace]" (needle in brackets) to prevent link texts of links to basename-only attachments
+			// like "[Attachment.txt](Attachment.txt)" from getting replaced as well.
+			toBrackets := append(append([]byte("["), to...), "]"...)
+			fromBrackets := append(append([]byte("["), from...), "]"...)
+			if bytes.Contains(markdown, toBrackets) {
+				log.Debugf(nil, "recovering link text: %q -> %q", toBrackets, fromBrackets)
+
+				markdown = bytes.ReplaceAll(
+					markdown,
+					toBrackets,
+					fromBrackets,
+				)
+			}
 		}
 
 		if !found {
