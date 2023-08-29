@@ -35,7 +35,6 @@ type Attachment struct {
 
 func ResolveAttachments(
 	api *confluence.API,
-	attachmentBasename bool,
 	page *confluence.PageInfo,
 	attachments []Attachment,
 ) ([]Attachment, error) {

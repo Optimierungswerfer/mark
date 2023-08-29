@@ -437,7 +437,6 @@ func processFile(
 
 	attaches, err := mark.ResolveAttachments(
 		api,
-		flags.AttachmentBasename,
 		target,
 		localAttachments,
 	)
